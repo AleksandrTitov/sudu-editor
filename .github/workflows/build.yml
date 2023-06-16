@@ -59,6 +59,8 @@ jobs:
         run: |
           NEW_VERSION=$(echo ${{ github.ref_name }} | tr -d 'v')
           echo "::notice::version \"${NEW_VERSION}\""
-          cd $GITHUB_WORKSPACE/sudu-editor/demo-edit-es-module/module && yarn publish --no-git-tag-version --new-version ${NEW_VERSION}
+          cd $GITHUB_WORKSPACE/sudu-editor/demo-edit-es-module/module
+          ls -Rlh 
+          yarn publish --no-git-tag-version --new-version ${NEW_VERSION}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

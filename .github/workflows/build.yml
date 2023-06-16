@@ -41,10 +41,10 @@ jobs:
           distribution: 'adopt'
       -
         name: Maven Antlr4 Prerequisite
-        run: cd $GITHUB_WORKSPACE/antlr4 && mvn install --update-snapshots -DskipTests
+        run: cd $GITHUB_WORKSPACE/antlr4 && mvn install -DskipTests
       -
         name: Maven Package
-        run: cd $GITHUB_WORKSPACE/sudu-editor && mvn package --update-snapshots -am -pl demo-edit-es-module
+        run: cd $GITHUB_WORKSPACE/sudu-editor && mvn package -am -pl demo-edit-es-module
       -
         name: Setup Node
         uses: actions/setup-node@v3

@@ -41,6 +41,7 @@ jobs:
         name: Restore Maven Cache
         uses: actions/cache/restore@v3
         with:
+          path: ~/.m2/repository
           key: maven-${{ hashFiles('**/pom.xml') }}
       -
         name: Set up Maven
@@ -77,7 +78,7 @@ jobs:
           NEW_VERSION=$(echo ${{ github.ref_name }} | tr -d 'v')
           echo "::notice::version \"${NEW_VERSION}\""
           cd $GITHUB_WORKSPACE/sudu-editor/demo-edit-es-module/module
-          ls -Rlh 
-          yarn publish --no-git-tag-version --new-version ${NEW_VERSION}
+          npm version ${NEW_VERSION}
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -57,17 +57,17 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       -
-        name: Maven Antlr4 Prerequisite
+        name: Maven TeaVM
         run: |
           cd $GITHUB_WORKSPACE/teavm
           ./gradlew publishToMavenLocal --no-daemon -x test
       -
-        name: Maven Antlr4 Prerequisite
+        name: Maven Antlr4
         run: |
           cd $GITHUB_WORKSPACE/antlr4
           mvn install --update-snapshots -DskipTests
       -
-        name: Maven Package
+        name: Maven Sudu Editor
         run: |
           cd $GITHUB_WORKSPACE/sudu-editor 
           mvn package --update-snapshots -am -pl demo-edit-es-module
@@ -87,7 +87,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@sudu-ide'
       -
-        name: Publish artifact to NPM Registry
+        name: Publish Sudu Editor package to NPM Registry
         if: github.event_name == 'push' && github.ref_type == 'tag'
         run: |
           NEW_VERSION=$(echo ${{ github.ref_name }} | tr -d 'v')

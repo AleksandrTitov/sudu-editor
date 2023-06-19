@@ -45,17 +45,20 @@ jobs:
           ref: 'master'
           path: 'antlr4'
       -
-        name: Restore Maven Cache
-        uses: actions/cache/restore@v3
-        with:
-          path: ~/.m2/repository
-          key: maven
-      -
-        name: Set up Maven
+        name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'adopt'
+      -
+        name: Restore Maven and Gradle Cache
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.m2/repository
+          key: sudu-editor-cache
       -
         name: Maven TeaVM
         run: |
@@ -76,8 +79,11 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         uses: actions/cache/save@v3
         with:
-          path: ~/.m2/repository
-          key: maven
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.m2/repository
+          key: sudu-editor-cache
       -
         name: Setup Node
         uses: actions/setup-node@v3

@@ -31,6 +31,13 @@ jobs:
         with:
           path: 'sudu-editor'
       -
+        name: Checkout TeaVM
+        uses: actions/checkout@v3
+        with:
+          repository: 'kirillp/teavm'
+          ref: 'master'
+          path: 'teavm'
+      -
         name: Checkout Antlr4 TeaVM compatible repo
         uses: actions/checkout@v3
         with:
@@ -49,6 +56,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      -
+        name: Maven Antlr4 Prerequisite
+        run: |
+          cd $GITHUB_WORKSPACE/teavm
+          ./gradlew publishToMavenLocal --no-daemon -x test
       -
         name: Maven Antlr4 Prerequisite
         run: |
